@@ -1,0 +1,34 @@
+## .NET Artifacts
+bin/
+obj/
+publish/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## User-specific files
+.idea/
+.DS_Store
+Thumbs.db
+
+## Docker & Local Infrastructure
+.docker/
+# Ignora dados persistidos do MySQL no host (se você mapear volumes locais)
+data/mysql/
+# Ignora logs e dados do Kafka/Zookeeper
+kafka-data/
+zookeeper-data/
+
+## Environment & Secrets
+.env
+.env.local
+*.pem
+*.pfx
+usersecrets.json
+
+## B3 Files (Arquivos COTAHIST podem ser grandes, não devem ir para o Git)
+cotacoes/*.TXT
+cotacoes/*.zip
