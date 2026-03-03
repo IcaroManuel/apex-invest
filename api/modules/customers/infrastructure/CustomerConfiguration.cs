@@ -1,0 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ApexInvest.Modules.Customers;
+
+namespace ApexInvest.Modules.Customers.Infrastructure;
+
+public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+{
+    public void Configure(EntityTypeBuilder<Customer> builder)
+    {
+        builder.ToTable("Customers");
+        builder.HasKey(c => c.Id);
+        builder.HasIndex(c => c.TaxId).IsUnique();
+        builder.Property(c => c.Name).IsRequired().HasMaxLength(200);
+        builder.Property(c => c.TaxId).IsRequired().HasMaxLength(11);
+        builder.Property(c => c.Email).IsRequired().HasMaxLength(200);
+        builder.Property(c => c.MounthlyContribution).HasPrecision(18, 2);
+
+    }
+}
