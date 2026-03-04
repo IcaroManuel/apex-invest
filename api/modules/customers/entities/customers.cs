@@ -6,20 +6,20 @@ public class Customer
     public string Name { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
     public string TaxId { get; private set; } = string.Empty; //CPF
-    public decimal MounthlyContribution { get; private set; }
+    public decimal MonthlyContribution { get; private set; }
     public bool IsActive { get; private set; }
     public DateTime EnrollmentDate { get; private set; }
 
     private Customer() { }
 
-    public Customer(string name, string taxId, string email, decimal mounthlyContribution)
+    public Customer(string name, string taxId, string email, decimal monthlyContribution)
     {
-        if (mounthlyContribution < 100m) throw new ArgumentException("The minimum monthly contribution is R$ 100,00.");
+        if (monthlyContribution < 100m) throw new ArgumentException("The minimum monthly contribution is R$ 100,00.");
 
         Name = name;
         TaxId = taxId;
         Email = email;
-        MounthlyContribution = mounthlyContribution;
+        MonthlyContribution = monthlyContribution;
         IsActive = true;
         EnrollmentDate = DateTime.UtcNow;
     }
@@ -29,6 +29,6 @@ public class Customer
     {
         if (newAmount < 100m) throw new ArgumentException("The minimum monthly contribution is R$ 100,00.");
 
-        MounthlyContribution = newAmount;
+        MonthlyContribution = newAmount;
     }
 }

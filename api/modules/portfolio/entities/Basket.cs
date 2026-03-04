@@ -9,7 +9,7 @@ public class Basket
     public string Name { get; private set; } = string.Empty;
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    public DateTime DeactivatedAt { get; private set; }
+    public DateTime? DeactivatedAt { get; private set; }
 
     private readonly List<BasketItem> _items = new();
     public virtual IReadOnlyCollection<BasketItem> Items => _items.AsReadOnly();

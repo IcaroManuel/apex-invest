@@ -14,7 +14,9 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Name).IsRequired().HasMaxLength(200);
         builder.Property(c => c.TaxId).IsRequired().HasMaxLength(11);
         builder.Property(c => c.Email).IsRequired().HasMaxLength(200);
-        builder.Property(c => c.MounthlyContribution).HasPrecision(18, 2);
+        builder.Property(c => c.MonthlyContribution).HasPrecision(18, 2);
+        builder.Property(c => c.IsActive).IsRequired();
+        builder.Property(c => c.EnrollmentDate).IsRequired();
 
     }
 }
