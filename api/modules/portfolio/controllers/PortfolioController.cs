@@ -17,6 +17,17 @@ public class PortfolioController : ControllerBase
         _context = context;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetHistory()
+    {
+        var baskets = await _context.Set<Basket>()
+            .Include(b => b.Items)
+            .OrderByDescending(b => b.CreatedAt)
+            .ToListAsync();
+
+        return Ok(baskets);
+    }
+
     [HttpPost("baskets")]
     public async Task<IActionResult> CreateBasket([FromBody] CreateBasketRequest request)
     {

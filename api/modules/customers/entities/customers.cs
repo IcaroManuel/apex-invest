@@ -1,4 +1,4 @@
-namespace ApexInvest.Modules.Customers;
+namespace ApexInvest.Modules.Customers.Entities;
 
 public class Customer
 {

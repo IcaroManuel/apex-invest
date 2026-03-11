@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ApexInvest.Modules.Customers;
+using ApexInvest.Modules.Customers.Entities;
 
 namespace ApexInvest.Modules.Customers.Infrastructure;
 
