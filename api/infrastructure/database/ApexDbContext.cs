@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ApexInvest.Modules.Customers.Entities;
 using ApexInvest.Modules.Trading.Entities;
+using ApexInvest.Modules.Market.Entities;
 
 namespace ApexInvest.Infrastructure.Database;
 
@@ -10,6 +11,7 @@ public class ApexDbContext : DbContext
 
     public DbSet<Customer> Customers { get; set; }
     public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+    public DbSet<StockPrice> StockPrices { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
