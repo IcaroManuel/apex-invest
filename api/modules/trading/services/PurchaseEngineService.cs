@@ -3,15 +3,18 @@ using ApexInvest.Infrastructure.Database;
 using ApexInvest.Modules.Portfolio.Entities;
 using ApexInvest.Modules.Trading.Entities;
 using ApexInvest.Modules.Market.Entities;
+using ApexInvest.Infrastructure.Messaging;
 
 namespace ApexInvest.Modules.Trading.Services;
 
 public class PurchaseEngineService
 {
     private readonly ApexDbContext _context;
-    public PurchaseEngineService(ApexDbContext context)
+    private readonly KafkaProducerService _kafkaProducer;
+    public PurchaseEngineService(ApexDbContext context, KafkaProducerService kafkaProducer)
     {
         _context = context;
+        _kafkaProducer = kafkaProducer;
     }
 
     public async Task ProcessMonthlyAports()
@@ -35,6 +38,16 @@ public class PurchaseEngineService
                 {
                     var order = new PurchaseOrder(customer.Id, item.Ticker, amountToInvest, DateTime.UtcNow);
                     _context.Set<PurchaseOrder>().Add(order);
+
+                    await _kafkaProducer.SendOrderMessageAsync("pruchase-orders", new
+                    {
+                        OrderId = order.Id,
+                        customer.TaxId,
+                        order.Ticker,
+                        order.AllocatedAmount,
+                        Quantity = quantity,
+                        PriceAtPurchase = stockPrice.Price
+                    });
                 }
             }
         }
