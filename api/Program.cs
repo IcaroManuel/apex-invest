@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ApexInvest.Infrastructure.Database;
 using ApexInvest.Modules.Trading.Services;
 using ApexInvest.Modules.Market.Services;
+using ApexInvest.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApexDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddScoped<PurchaseEngineService>();
 builder.Services.AddScoped<B3ParserService>();
+builder.Services.AddHostedService<TaxConsumerService>();
 
 var app = builder.Build();
 
